@@ -1,8 +1,8 @@
-Fjord Prototype Boilerplate
+Simple shop
 ===================
 
 
-Welcome to this prototype boilerplate, glad you are here ! The aim of this project is to create a deadly simple boilerplate to start a new project. 
+Welcome to this Simple shop, glad you are here ! The aim of this project is to create a deadly simple shop to start a new e-commerce. 
 This boilerplate should be able to handle the most simple project, and also be able to scale for bigger projects. Let's take a look of what's inside 🤓
 
 ----------
