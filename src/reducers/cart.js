@@ -30,16 +30,16 @@ export default (state = {
         }
       }
     case ACTIONS.REMOVE_FROM_CART:
-      const rmProductID = action.payload.product.id
-      const productsCleaned = state.products.filter((p) => p.id !== rmProductID)
+      const rmProduct = action.payload.product
+      const productsCleaned = state.products.filter((p) => p.id !== rmProduct.id)
 
       return {
         ...state,
         products: productsCleaned
       }
     case ACTIONS.INCREASE_PRODUCT_QUANTITY_IN_CART:
-      const incProductID = action.payload.product.id
-      const selectedProductInc = state.products.filter((p) => p.id === incProductID)[0]
+      const incProduct = action.payload.product
+      const selectedProductInc = state.products.filter((p) => p.id === incProduct.id)[0]
       selectedProductInc.quantity += 1
 
       return {
@@ -49,15 +49,25 @@ export default (state = {
         ]
       }
     case ACTIONS.DECREASE_PRODUCT_QUANTITY_IN_CART:
-      const decProductID = action.payload.product.id
-      const selectedProductDec = state.products.filter((p) => p.id === decProductID)[0]
-      selectedProductDec.quantity -= 1
+      const decProduct = action.payload.product
+      if (decProduct.quantity <= 1) {
+        // Delete the product
+        const productsCleaned = state.products.filter((p) => p.id !== decProduct.id)
+        return {
+          ...state,
+          products: productsCleaned
+        }
+      } else {
+        // Decrease quantity
+        const selectedProductDec = state.products.filter((p) => p.id === decProduct.id)[0]
+        selectedProductDec.quantity -= 1
 
-      return {
-        ...state,
-        products: [
-          ...state.products,
-        ]
+        return {
+          ...state,
+          products: [
+            ...state.products,
+          ]
+        }
       }
     default:
       return state

@@ -8,6 +8,9 @@ import { connect } from 'react-redux'
 import { increment, decrement } from 'Actions/counter'
 import { add, remove, increase, decrease } from 'Actions/cart'
 
+import Catalog from 'Components/catalog/catalog'
+import Cart from 'Components/cart/cart'
+
 // -----------------------------
 // Core
 
@@ -26,14 +29,6 @@ class Home extends React.Component {
     this.props.increment()
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if(prevProps.cart.products.length !== this.props.cart.products.length){
-  //     //Perform some operation here
-  //     this.setState({someState: someValue});
-  //     this.classMethod();
-  //   }
-  // }
-
   componentWillUnmount () {
     // Before leaving
   }
@@ -45,15 +40,8 @@ class Home extends React.Component {
   render () {
     return (
       <div id='home'>
-        <button onClick={() => this.props.add({id: 1, name: 'trololo'}, 2)}>Add tololol</button>
-        <button onClick={() => this.props.remove({id: 1, name: 'trololo'})}>Remove tololol</button>
-        <button onClick={() => this.props.increase({id: 1, name: 'trololo'})}>increase tololol</button>
-        <button onClick={() => this.props.decrease({id: 1, name: 'trololo'})}>decrease tololol</button>
-        <ul>
-          {this.props.cart.products.map((p) => {
-            return <li key={p.id}>{p.name} - {p.quantity}</li>
-          })}
-        </ul>
+        <Catalog products={[{id: 1, name: 'product 1'}, {id: 2, name: 'product 2'}, {id: 3, name: 'product 3'}, {id: 4, name: 'product 4'}]} />
+        <Cart />
       </div>
     )
   }
