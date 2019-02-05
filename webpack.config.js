@@ -45,10 +45,14 @@ module.exports = {
         test: /\.styl$/,
         use: [
           'style-loader',
-          'css-loader',
           {
-            loader: 'stylus-loader'
-          }
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          },
+          'stylus-loader'
         ]
       }, {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
