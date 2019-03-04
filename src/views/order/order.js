@@ -5,14 +5,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import styles from './styles.styl'
-
-import Item from './item'
+import Cart from 'Components/cart/cart'
 
 // -----------------------------
 // Core
 
-class Catalog extends React.Component {
+class Order extends React.Component {
   constructor (props) {
     super(props)
     this.state = {}
@@ -33,25 +31,29 @@ class Catalog extends React.Component {
 
   render () {
     return (
-      <div className={styles.catalog}>
-        {this.props.products.map((p) => {
-          return <Item key={p._id} product={p} />
-        })}
+      <div id='order'>
+        <Cart />
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  // products: state.products
+  
 })
 
 const mapDispatchToProps = dispatch => ({
-  // increment: () => dispatch(increment()),
+  
 })
 
-Catalog.propTypes = {
-
+Order.propTypes = {
+  optionalArray: PropTypes.array,
+  optionalBool: PropTypes.bool,
+  optionalFunc: PropTypes.func,
+  optionalNumber: PropTypes.number,
+  optionalObject: PropTypes.object,
+  optionalString: PropTypes.string,
+  optionalSymbol: PropTypes.symbol
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Catalog)
+export default connect(mapStateToProps, mapDispatchToProps)(Order)

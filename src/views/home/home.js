@@ -5,11 +5,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { increment, decrement } from 'Actions/counter'
 import { add, remove, increase, decrease } from 'Actions/cart'
+import { getAllProducts } from 'Actions/catalog'
+import { readToken } from 'Actions/user'
 
 import Catalog from 'Components/catalog/catalog'
 import Cart from 'Components/cart/cart'
+import Login from 'Components/login/login'
 
 // -----------------------------
 // Core
@@ -23,10 +25,9 @@ class Home extends React.Component {
   componentDidMount () {
     // Component appear
     this.animEnter()
-    // Before update
-    console.log(this.props.counter)
     // Update
-    this.props.increment()
+    this.props.readToken()
+    this.props.getAllProducts()
   }
 
   componentWillUnmount () {
@@ -40,8 +41,10 @@ class Home extends React.Component {
   render () {
     return (
       <div id='home'>
-        <Catalog products={[{id: 1, name: 'product 1'}, {id: 2, name: 'product 2'}, {id: 3, name: 'product 3'}, {id: 4, name: 'product 4'}]} />
+        <Catalog products={this.props.catalog} />
         <Cart />
+        {!this.props.user.token && <Login />}
+        {this.props.user.token && `Welcome ${this.props.user.firstname}`}
       </div>
     )
   }
@@ -49,12 +52,14 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   counter: state.counter,
-  cart: state.cart
+  cart: state.cart,
+  catalog: state.catalog,
+  user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({
-  increment: () => dispatch(increment()),
-  decrement: () => dispatch(decrement()),
+  getAllProducts: () => dispatch(getAllProducts()),
+  readToken: () => dispatch(readToken()),
   add: (p, q) => dispatch(add(p, q)),
   remove: (p) => dispatch(remove(p)),
   increase: (p) => dispatch(increase(p)),

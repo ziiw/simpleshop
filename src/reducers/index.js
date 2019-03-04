@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux'
 import { connectRouter } from 'connected-react-router'
 
-import counter from './counter'
+import user from './user'
 import cart from './cart'
+import catalog from './catalog'
 
 export default (history) => combineReducers({
   router: connectRouter(history),
-  counter,
-  cart
+  user,
+  cart,
+  catalog
 })

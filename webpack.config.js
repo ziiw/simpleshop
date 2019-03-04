@@ -15,6 +15,7 @@ module.exports = {
   },
   devtool: 'eval-source-map',
   devServer: {
+    historyApiFallback: true,
     contentBase: path.resolve(__dirname, './src'),
     hot: true
   },

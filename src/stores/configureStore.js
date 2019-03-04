@@ -5,7 +5,7 @@ import { routerMiddleware } from 'connected-react-router'
 import baseReducers from 'Reducers/'
 
 export const history = createBrowserHistory()
-const initialState = { cart: {products: [], discount: ''} }
+const initialState = { cart: {products: [], discount: ''}, catalog: [], user: { } }
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 export const store = createStore(
