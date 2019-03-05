@@ -7,6 +7,7 @@ This boilerplate should be able to handle the most simple project, and also be a
 
 ----------
 
+## Front-end Customisation
 ### 1. Install ⏳
 Grab all the packages you need to run this project.
 ```
@@ -32,4 +33,22 @@ Now you are able to grab `/dist` and deploy it wherever you want !
 
 ### Documentation
 
-No time to write it yet... 
+#### Data Types
+1. Products
+  - name
+  - description
+  - category
+  - tags
+  - visuals
+  - variants
+    - sizes?
+    - colors?
+    - ...
+  - price
+  - availibility
+2. Categories
+  - name
+3. Tags
+  - name
+4. Discounts
+  - code

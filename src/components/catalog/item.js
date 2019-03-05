@@ -34,8 +34,12 @@ class Item extends React.Component {
   render () {
     return (
       <div className={styles.item}>
-        {this.props.product.name}
-        <button onClick={() => this.props.add(this.props.product, 1)}>Add to cart</button>
+        <p>{this.props.product.name}</p>
+        <p>{this.props.product.description}</p>
+        <div>
+          <p>{this.props.product.price} €</p>
+          <button onClick={() => this.props.add(this.props.product, 1)}>Add to cart</button>
+        </div>
       </div>
     )
   }

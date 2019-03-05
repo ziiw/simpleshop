@@ -11,6 +11,7 @@ import { store, history } from 'Stores/configureStore'
 // Views
 
 import Home from 'Views/home/home'
+import Order from 'Views/order/order'
 
 // -----------------------------
 // Core
@@ -28,7 +29,8 @@ export default class Layout extends React.Component {
           <Provider store={store}>
             <ConnectedRouter history={history}>
               <Switch>
-                <Route path='/' component={Home} />
+                <Route path='/' exact component={Home} />
+                <Route path='/order' component={Order} />
               </Switch>
             </ConnectedRouter>
           </Provider>
