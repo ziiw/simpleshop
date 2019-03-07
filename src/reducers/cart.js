@@ -5,71 +5,54 @@ export default (state = {
   discount: ""
 }, action) => {
   switch (action.type) {
-    // TODO: Try to rewrite this in a better way
     case ACTIONS.ADD_TO_CART:
       const newProduct = action.payload.product
       newProduct.quantity = action.payload.quantity
-      const productInCart = state.products.filter((p) => p.id === newProduct.id)
-      if (productInCart.length === 0) {
-        return {
-          ...state,
-          products: [
-            ...state.products,
-            newProduct
-          ]
-        }
-      } else {
-        // Tricks: We update the reference so 
-        // will be updated in the legacy state
-        productInCart[0].quantity += newProduct.quantity
-        return {
-          ...state,
-          products: [
-            ...state.products,
-          ]
-        }
+      const productInCart = state.products.filter((p) => p._id === newProduct._id)
+      return {
+        ...state,
+        products: (productInCart.length === 0) ? addProduct(state, newProduct) : updateProductQuantity(state, newProduct, 1)
       }
     case ACTIONS.REMOVE_FROM_CART:
-      const rmProduct = action.payload.product
-      const productsCleaned = state.products.filter((p) => p.id !== rmProduct.id)
-
       return {
         ...state,
-        products: productsCleaned
+        products: removeProduct(state, action.payload.product)
       }
     case ACTIONS.INCREASE_PRODUCT_QUANTITY_IN_CART:
-      const incProduct = action.payload.product
-      const selectedProductInc = state.products.filter((p) => p.id === incProduct.id)[0]
-      selectedProductInc.quantity += 1
-
       return {
         ...state,
-        products: [
-          ...state.products,
-        ]
+        products: updateProductQuantity(state, action.payload.product, 1)
       }
     case ACTIONS.DECREASE_PRODUCT_QUANTITY_IN_CART:
-      const decProduct = action.payload.product
-      if (decProduct.quantity <= 1) {
-        // Delete the product
-        const productsCleaned = state.products.filter((p) => p.id !== decProduct.id)
-        return {
-          ...state,
-          products: productsCleaned
-        }
-      } else {
-        // Decrease quantity
-        const selectedProductDec = state.products.filter((p) => p.id === decProduct.id)[0]
-        selectedProductDec.quantity -= 1
-
-        return {
-          ...state,
-          products: [
-            ...state.products,
-          ]
-        }
+      const { product } = action.payload
+      return {
+        ...state,
+        products: (product.quantity <= 1) ? removeProduct(state, product) : updateProductQuantity(state, product, -1)
       }
     default:
       return state
   }
+}
+
+function addProduct (state, product) {
+  let updatedProducts = state.products.slice()
+  updatedProducts.splice(updatedProducts.length, 0, product)
+  return updatedProducts
+}
+
+function removeProduct (state, product) {
+  return state.products.filter((p) => p._id !== product._id)
+}
+
+function updateProductQuantity (state, product, qty) {
+  return state.products.map(p => {
+    if (p._id !== product._id) {
+      return p
+    }
+
+    return {
+      ...p,
+      quantity: p.quantity + qty
+    }
+  })
 }

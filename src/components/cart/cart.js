@@ -35,9 +35,9 @@ class Cart extends React.Component {
   calculTotal () {
     return this.props.cart.products.reduce((acc, item) => {
       if (item.quantity) {
-        return item.price * item.quantity
+        return acc + (item.price * item.quantity)
       } else {
-        return item.price
+        return acc + item.price
       }
     }, 0)
   }
