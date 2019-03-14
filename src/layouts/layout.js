@@ -25,7 +25,8 @@ export default class Layout extends React.Component {
   render () {
     return (
       <div id='layout'>
-        <div id='wrapperPage' >
+        <div id='wrapperPage'>
+          <h1>SimpleShop</h1>
           <Provider store={store}>
             <ConnectedRouter history={history}>
               <Switch>
